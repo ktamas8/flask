@@ -25,3 +25,6 @@ api.add_resource(PrivateResource, '/private')
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+# curl -X GET http://localhost:5000/api/v1/private
+# curl -X GET http://localhost:5000/api/v1/private --user admin:123123
