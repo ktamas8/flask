@@ -1,0 +1,9 @@
+Flask
+Flask-Login
+Flask-SQLAlchemy
+Flask-WTF
+Jinja2==2.7.3
+MarkupSafe==0.23
+SQLAlchemy==0.9.7
+Werkzeug==0.9.6
+itsdangerous==0.24
