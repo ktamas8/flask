@@ -1,8 +1,0 @@
-Collecting Werkzeug
-  Using cached Werkzeug-1.0.1-py2.py3-none-any.whl (298 kB)
-Installing collected packages: Werkzeug
-  Attempting uninstall: Werkzeug
-    Found existing installation: Werkzeug 0.9.6
-    Uninstalling Werkzeug-0.9.6:
-      Successfully uninstalled Werkzeug-0.9.6
-Successfully installed Werkzeug-1.0.1
