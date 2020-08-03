@@ -1,0 +1,5 @@
+auth_url='http://10.36.50.192:5000/v3'
+username='admin'
+project_id='fe21e057bfbb4c42b5b7dd91eef1997a'
+user_domain_id='default'
+ssl_bundle=''
