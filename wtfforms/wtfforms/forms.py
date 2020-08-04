@@ -1,15 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import (StringField,
-                     TextAreaField,
-                     SubmitField,
-                     PasswordField,
-                     DateField,
-                     SelectField)
-from wtforms.validators import (DataRequired,
-                                Email,
-                                EqualTo,
-                                Length,
-                                URL)
+from wtforms import StringField, TextAreaField, SubmitField, PasswordField, DateField, SelectField
+from wtforms.validators import DataRequired, Email, EqualTo, Length, URL
 
 class ContactForm(FlaskForm):
     """Contact form."""
@@ -21,7 +12,11 @@ class ContactForm(FlaskForm):
 class LoginForm(FlaskForm):
     """Login form."""
     name = StringField('Name', validators=[DataRequired(), Length(min=2, max=20)])
-    password = StringField('Password', validators=[DataRequired(), Length(min=8, message=('Your message is too short.'))])
+    password = StringField('Password', validators=[DataRequired(), Length(min=8, message=('Your password is too short.'))])
+    submit = SubmitField('Submit')
+
+class PrefOS(FlaskForm):
+    """Openstack preferences form."""
     submit = SubmitField('Submit')
 
 class SignupForm(FlaskForm):

@@ -1,0 +1,70 @@
+
+https://www.sqlitetutorial.net/sqlite-commands/
+
+
+
+SQLITE INFO
+
+nisz@projectx:~/flask/wtfforms/wtfforms$ sqlite3 site.db
+SQLite version 3.22.0 2018-01-22 18:45:57
+Enter ".help" for usage hints.
+sqlite> .tables
+instances
+sqlite> .schema instances
+CREATE TABLE instances (
+        uuid VARCHAR(20) NOT NULL,
+        name VARCHAR(20) NOT NULL,
+        state VARCHAR(20) NOT NULL,
+        PRIMARY KEY (uuid)
+);
+sqlite> .fullschema
+CREATE TABLE instances (
+        uuid VARCHAR(20) NOT NULL,
+        name VARCHAR(20) NOT NULL,
+        state VARCHAR(20) NOT NULL,
+        PRIMARY KEY (uuid)
+);
+/* No STAT tables available */
+sqlite> .indexes
+sqlite_autoindex_instances_1
+
+
+
+
+SQLITE DELETE COLUMN
+
+sqlite> .schema instances
+CREATE TABLE instances (
+        uuid VARCHAR(20) NOT NULL,
+        name VARCHAR(20) NOT NULL,
+        state VARCHAR(20) NOT NULL, flavor integer,
+        PRIMARY KEY (uuid)
+);
+sqlite> alter table instances rename to instances_old;
+sqlite> create table instances (
+   ...> uuid VARCHAR(20) NOT NULL,
+   ...> name VARCHAR(20) NOT NULL,
+   ...> state VARCHAR(20) NOT NULL,
+   ...> flavor INTEGER,
+   ...> PRIMARY KEY (uuid)
+   ...> );
+sqlite> insert into instances (uuid, name, state) select uuid, name, state from instances_old;
+sqlite> commit;
+Error: cannot commit - no transaction is active
+sqlite> pragma foreign_keys=on;
+sqlite> .schema instances
+CREATE TABLE instances (
+uuid VARCHAR(20) NOT NULL,
+name VARCHAR(20) NOT NULL,
+state VARCHAR(20) NOT NULL,
+flavor INTEGER,
+PRIMARY KEY (uuid)
+);
+sqlite> .schema instances_old
+CREATE TABLE IF NOT EXISTS "instances_old" (
+        uuid VARCHAR(20) NOT NULL,
+        name VARCHAR(20) NOT NULL,
+        state VARCHAR(20) NOT NULL, flavor integer,
+        PRIMARY KEY (uuid)
+);
+sqlite> drop table instances_old;

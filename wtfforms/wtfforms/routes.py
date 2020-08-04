@@ -1,14 +1,21 @@
-from flask import Flask, url_for, render_template, redirect, flash, request
-from forms import ContactForm, LoginForm
-from config import Config
+from flask import url_for, render_template, redirect, flash, request
+from wtfforms import app
+from wtfforms.forms import ContactForm, LoginForm, PrefOS
+from wtfforms.models import Instance, Flavor
 
-app = Flask(__name__, instance_relative_config=False)
-app.config.from_object('config.Config')
-
+from wtfforms.vms.vm import *
+from wtfforms.db_load import *
 
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/vm')
+def vm():
+    # vm_list()
+    # generate_vm_table_header(name, id)
+    instance = Instance.query.all()
+    return render_template('vm.html', instance=instance)
 
 @app.route('/login', methods=["GET","POST"])
 def login_page():
@@ -33,5 +40,11 @@ def contact():
 
     return render_template('contact.html', form=form)
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=8080,debug=True)
+@app.route('/pref-os', methods=["GET","POST"])
+def openstack_preferences():
+    pref_os = PrefOS()
+    if pref_os.validate_on_submit():
+        instance_load(vm_discover())
+        flash('A virtuális gépek kiolvasása befejeződött!', 'success')
+        return redirect(url_for('home'))
+    return render_template('pref_openstack.html', form=pref_os)

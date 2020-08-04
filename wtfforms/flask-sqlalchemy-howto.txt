@@ -1,0 +1,85 @@
+python (cmdline)
+
+CREATE DB:
+
+from wtfforms import db
+db.drop_all()
+db.create_all()
+
+
+INSERT DB:
+
+from wtfforms.models import Instance, Flavor
+
+flavor1 = Flavor(id='1', name='m1.tiny', vcpu='1', disk='1', ram='512')
+flavor2 = Flavor(id='2', name='m1.small', vcpu='1', disk='20', ram='2048')
+flavor3 = Flavor(id='3', name='m1.medium', vcpu='2', disk='40', ram='4096')
+flavor4 = Flavor(id='4', name='m1.large', vcpu='4', disk='80', ram='8192')
+flavor5 = Flavor(id='5', name='m1.xlarge', vcpu='8', disk='160', ram='16384')
+db.session.add(flavor1)
+db.session.add(flavor2)
+db.session.add(flavor3)
+db.session.add(flavor4)
+db.session.add(flavor5)
+db.session.commit()
+
+vm1 = Instance(uuid='aee1d242-730f-431f-88c1-87630c0f07ba', name='vm01', state='active', flavor_id='1')
+vm2 = Instance(uuid='df8d56fc-9cea-4dfd-a8d3-28764de3cb08', name='vm02', state='active', flavor_id='3')
+vm3 = Instance(uuid='0b27baa1-0ca6-49a7-b3f4-48388e440245', name='vm03', state='build', flavor_id='2')
+vm4 = Instance(uuid='754237a1-0876-2222-adf4-12388e440fff', name='vm04', state='active', flavor_id='1')
+db.session.add(vm1)
+db.session.add(vm2)
+db.session.add(vm3)
+db.session.add(vm4)
+db.session.commit()
+
+
+
+QUERY DB:
+
+sqlite> select * from flavor;
+1|m1.tiny|1|1|512
+2|m1.small|1|20|2048
+3|m1.medium|2|40|4096
+4|m1.large|4|80|8192
+5|m1.xlarge|8|160|16384
+
+sqlite> select * from instance;
+aee1d242-730f-431f-88c1-87630c0f07ba|vm01|active|1
+df8d56fc-9cea-4dfd-a8d3-28764de3cb08|vm02|active|3
+0b27baa1-0ca6-49a7-b3f4-48388e440245|vm03|build|2
+
+Flavor.query.all()
+[User('1', 'm1.tiny'), User('2', 'm1.small'), User('3', 'm1.medium'), User('4', 'm1.large'), User('5', 'm1.xlarge')]
+
+flavor = Flavor.query.filter_by(name='m1.tiny').first()
+
+flavor
+User('1', 'm1.tiny')
+
+flavor.instances
+[User('aee1d242-730f-431f-88c1-87630c0f07ba', 'vm01', 'active'), User('754237a1-0876-2222-adf4-12388e440fff', 'vm04', 'active')]
+
+
+
+Instance.query.all()
+[User('aee1d242-730f-431f-88c1-87630c0f07ba', 'vm01', 'active'), User('df8d56fc-9cea-4dfd-a8d3-28764de3cb08', 'vm02', 'active'), User('0b27baa1-0ca6-49a7-b3f4-48388e440245', 'vm03', 'build')]
+
+Instance.query.first()
+User('aee1d242-730f-431f-88c1-87630c0f07ba', 'vm01', 'active')
+
+Instance.query.filter_by(name='vm02').all()
+[User('df8d56fc-9cea-4dfd-a8d3-28764de3cb08', 'vm02', 'active')]
+
+vm = Instance.query.filter_by(name='vm02').first()
+User('df8d56fc-9cea-4dfd-a8d3-28764de3cb08', 'vm02', 'active')
+vm.uuid
+'df8d56fc-9cea-4dfd-a8d3-28764de3cb08'
+
+
+DROP DB:
+
+db.drop_all()
+db.create_all()
+Instances.query.all()
+[]

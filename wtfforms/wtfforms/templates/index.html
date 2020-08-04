@@ -11,7 +11,7 @@
 <body>
 	<header class="site-header">
 	  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	    <a class="navbar-brand" href="#">Navbar</a>
+	    <a class="navbar-brand" href="#">Menu</a>
 	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
 	    </button>
@@ -20,12 +20,26 @@
 	        <li class="nav-item active">
 	          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
 	        </li>
+					<li class="nav-item">
+						<a class="nav-link" href="/vm">VM</a>
+					</li>
 	        <li class="nav-item">
 	          <a class="nav-link" href="/contact">Contact</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link" href="/login">Login</a>
 	        </li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="/pref" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Preferences
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="/pref-os">Openstack</a>
+							<a class="dropdown-item" href="/pref-vmw">VMware</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="/general">General</a>
+						</div>
+					</li>
 	      </ul>
 	      <form class="form-inline my-2 my-lg-0">
 	        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -34,9 +48,9 @@
 	    </div>
 	  </nav>
 	</header>
-  <main role="main" class="container">
+  <main role="main" class="container-fluid">
 	  <div class="row">
-		  <div class="col-md-8">
+		  <div class="col-10" align="left">
 		    {% with messages = get_flashed_messages(with_categories=true) %}
 		  	  {% if messages %}
 		  	    {% for category, message in messages %}
@@ -51,23 +65,24 @@
 		  	{% endwith %}
 		    {% block body %}{% endblock %}
 		  </div>
-			<div class="col-md-4">
+			<div class="col-md-2" align="right">
 				<div class="content-section">
-					<h3>Our Sidebar</h3>
-					<p class='text-muted'>You can put any information here you'd like.
+					<h3>Sidebar</h3>
+					<p class='text-muted'>Ide kerülnek az attribútumok
 						<ul class="list-group">
-							<li class="list-group-item list-group-item-light">Latest Posts</li>
-							<li class="list-group-item list-group-item-light">Announcements</li>
-							<li class="list-group-item list-group-item-light">Calendars</li>
-							<li class="list-group-item list-group-item-light">etc</li>
+							<li class="list-group-item list-group-item-light">Riasztások</li>
+							<li class="list-group-item list-group-item-light">Logok</li>
+							<li class="list-group-item list-group-item-light">Eventek</li>
+							<li class="list-group-item list-group-item-light">etc...</li>
 						</ul>
 					</p>
 				</div>
 			</div>
 		</div>
-  </main>
+	</main>
 
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
 </body>
 </html>
