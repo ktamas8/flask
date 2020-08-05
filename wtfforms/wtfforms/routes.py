@@ -1,6 +1,6 @@
 from flask import url_for, render_template, redirect, flash, request
 from wtfforms import app
-from wtfforms.forms import ContactForm, LoginForm, PrefOSForm
+from wtfforms.forms import ContactForm, LoginForm, DiscoverOpenStackForm, DiscoverVMwareForm
 from wtfforms.models import Instance, Flavor
 
 from wtfforms.provider.openstack import *
@@ -41,6 +41,7 @@ def vm_show(vm_uuid):
 @app.route('/vm/list', methods=["GET","POST"])
 def vm_list():
     instance = Instance.query.all()
+    print(instance)
     return render_template('vm_list.html', instance=instance)
 
 @app.route('/login', methods=["GET","POST"])
@@ -61,17 +62,17 @@ def contact():
         flash('Thank you for your message!', 'success')
         return redirect(url_for('home'))
 
-    # if form.validate_on_submit():
-    #     flash("Köszönjük, hogy üzenetet hagyott!")
-    #     return redirect(url_for('home'))
-
     return render_template('contact.html', form=form)
 
-@app.route('/pref-os', methods=["GET","POST"])
-def openstack_preferences():
-    pref_os = PrefOSForm()
-    if pref_os.validate_on_submit():
+@app.route('/discover_openstack', methods=["GET","POST"])
+def discover_openstack():
+    disc_os = DiscoverOpenStackForm()
+    if disc_os.validate_on_submit():
         instance_load(instance_discover())
         flash('A virtuális gépek kiolvasása befejeződött!', 'success')
         return redirect(url_for('home'))
-    return render_template('pref_openstack.html', form=pref_os)
+    return render_template('pref_openstack.html', form=disc_os)
+
+@app.route('/discover_vmware', methods=["GET","POST"])
+def discover_vmware():
+    pass

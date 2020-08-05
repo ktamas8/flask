@@ -15,8 +15,12 @@ class LoginForm(FlaskForm):
     password = StringField('Password', validators=[DataRequired(), Length(min=8, message=('Your password is too short.'))])
     submit = SubmitField('Submit')
 
-class PrefOSForm(FlaskForm):
-    """Openstack preferences form."""
+class DiscoverOpenStackForm(FlaskForm):
+    """Openstack discover form."""
+    submit = SubmitField('Submit')
+
+class DiscoverVMwareForm(FlaskForm):
+    """VMware discover form."""
     submit = SubmitField('Submit')
 
 class SignupForm(FlaskForm):
