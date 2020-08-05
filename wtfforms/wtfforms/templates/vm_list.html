@@ -10,7 +10,6 @@
                     <th>VM Erőforrás</th>
                     <th>VM Azonosító</th>
                     <th>VM Művelet</th>
-                    <th>VM control</th>
                   </tr>
                 </thead>
                 <tbody>{% for inst in instance %}
@@ -21,16 +20,24 @@
                       <td>{{ inst.resource.name }}</td>
                       <td>{{ inst.uuid }}</td>
                       <td>
-                        <form method="POST" action="">
-                          {{ vmcontrol.hidden_tag() }}
-                          {{ vmcontrol.start(class="btn btn-success btn-sm", label="Start") }}
-                          {{ vmcontrol.stop(class="btn btn-danger btn-sm", label="Stop") }}
-                          {{ vmcontrol.pause(class="btn btn-warning btn-sm", label="Pause") }}
-                          {{ vmcontrol.console(class="btn btn-primary btn-sm", label="Console") }}
-                          {{ vmcontrol.show(class="btn btn-secondary btn-sm", label="Show") }}
-                        </form>
+                        {% if inst.state == 'active' %}
+                          <a class="btn btn-success btn-sm disabled" href="{{ url_for('vm_start', vm_uuid=inst.uuid) }}">Start</a>
+                        {% else %}
+                          <a class="btn btn-success btn-sm" href="{{ url_for('vm_start', vm_uuid=inst.uuid) }}">Start</a>
+                        {% endif %}
+                        {% if inst.state == 'active' %}
+                          <a class="btn btn-danger btn-sm" href="{{ url_for('vm_stop', vm_uuid=inst.uuid) }}">Stop</a>
+                        {% else %}
+                          <a class="btn btn-success btn-sm disabled" href="{{ url_for('vm_start', vm_uuid=inst.uuid) }}">Start</a>
+                        {% endif %}
+                        {% if inst.state == 'active' %}
+                          <a class="btn btn-warning btn-sm" href="{{ url_for('vm_pause', vm_uuid=inst.uuid) }}">Pause</a>
+                        {% else %}
+                          <a class="btn btn-warning btn-sm disabled" href="{{ url_for('vm_pause', vm_uuid=inst.uuid) }}">Pause</a>
+                        {% endif %}
+                        <a class="btn btn-primary btn-sm" href="{{ url_for('vm_console', vm_uuid=inst.uuid) }}">Console</a>
+                        <a class="btn btn-secondary btn-sm" href="{{ url_for('vm_show', vm_uuid=inst.uuid) }}">Info</a>
                       </td>
-                      <td><a class="article-title" href="{{ url_for('vm_show', vm_uuid=inst.uuid) }}">Start</a></td>
                     </tr>{% endfor %}
                 </tbody>
               </table>

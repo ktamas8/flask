@@ -19,14 +19,6 @@ class PrefOSForm(FlaskForm):
     """Openstack preferences form."""
     submit = SubmitField('Submit')
 
-class VMControlForm(FlaskForm):
-    """Openstack vm control form."""
-    start = SubmitField(label='Start')
-    stop = SubmitField(label='Stop')
-    pause = SubmitField(label='Pause')
-    console = SubmitField(label='Console')
-    show = SubmitField(label='Show')
-
 class SignupForm(FlaskForm):
     """Sign up for a user account."""
     email = StringField('Email', [
