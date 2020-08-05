@@ -1,5 +1,6 @@
 from wtfforms import db
 from wtfforms.models import Instance, Flavor
+from sqlalchemy import exc
 
 def instance_load(vms):
     for vm in vms:
@@ -9,8 +10,13 @@ def instance_load(vms):
         print(vm[3])
         print('----')
         instance = Instance(uuid = vm[0], name = vm[1], state = vm[2], flavor_id = vm[3])
-        db.session.add(instance)
-        db.session.commit()
+
+        try:
+            db.session.add(instance)
+            return db.session.commit()
+        except exc.IntegrityError:
+            # print('IntegrityError Exception')
+            db.session.rollback()
 
 def image_load(images):
     pass
