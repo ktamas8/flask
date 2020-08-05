@@ -3,7 +3,7 @@ from wtfforms import app
 from wtfforms.forms import ContactForm, LoginForm, PrefOSForm
 from wtfforms.models import Instance, Flavor
 
-from wtfforms.discover.openstack import *
+from wtfforms.provider.openstack import *
 from wtfforms.db_load import *
 
 @app.route('/')
@@ -12,11 +12,13 @@ def home():
 
 @app.route('/vm/start/<string:vm_uuid>')
 def vm_start(vm_uuid):
+    instance_start(vm_uuid)
     flash(f'Start... {vm_uuid}', 'success')
     return redirect(url_for('vm_list'))
 
 @app.route('/vm/stop/<string:vm_uuid>')
 def vm_stop(vm_uuid):
+    instance_stop(vm_uuid)
     flash(f'Stop... {vm_uuid}', 'danger')
     return redirect(url_for('vm_list'))
 

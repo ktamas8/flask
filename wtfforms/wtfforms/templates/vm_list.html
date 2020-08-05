@@ -28,8 +28,7 @@
                         {% if inst.state == 'active' %}
                           <a class="btn btn-danger btn-sm" href="{{ url_for('vm_stop', vm_uuid=inst.uuid) }}">Stop</a>
                         {% else %}
-                          <a class="btn btn-success btn-sm disabled" href="{{ url_for('vm_start', vm_uuid=inst.uuid) }}">Start</a>
-                        {% endif %}
+                          <a class="btn btn-danger btn-sm disabled" href="{{ url_for('vm_start', vm_uuid=inst.uuid) }}">Stop</a>                        {% endif %}
                         {% if inst.state == 'active' %}
                           <a class="btn btn-warning btn-sm" href="{{ url_for('vm_pause', vm_uuid=inst.uuid) }}">Pause</a>
                         {% else %}
