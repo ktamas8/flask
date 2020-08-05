@@ -3,7 +3,7 @@ from wtfforms import app
 from wtfforms.forms import ContactForm, LoginForm, PrefOS
 from wtfforms.models import Instance, Flavor
 
-from wtfforms.vms.vm import *
+from wtfforms.discover.openstack import *
 from wtfforms.db_load import *
 
 @app.route('/')
@@ -44,7 +44,7 @@ def contact():
 def openstack_preferences():
     pref_os = PrefOS()
     if pref_os.validate_on_submit():
-        instance_load(vm_discover())
+        instance_load(instance_discover())
         flash('A virtuális gépek kiolvasása befejeződött!', 'success')
         return redirect(url_for('home'))
     return render_template('pref_openstack.html', form=pref_os)

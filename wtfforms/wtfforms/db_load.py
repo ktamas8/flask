@@ -3,12 +3,9 @@ from wtfforms.models import Instance, Flavor
 from sqlalchemy import exc
 
 def instance_load(vms):
+
     for vm in vms:
-        print(vm[0])
-        print(vm[1])
-        print(vm[2])
-        print(vm[3])
-        print('----')
+        # print(vm[0], vm[1], vm[2], vm[3])
         instance = Instance(uuid = vm[0], name = vm[1], state = vm[2], flavor_id = vm[3])
 
         try:

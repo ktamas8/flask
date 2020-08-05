@@ -2,7 +2,7 @@ from config import Config
 from pprint import pprint
 from shade import *
 
-def vm_discover():
+def instance_discover():
     conn = OpenStackCloud(cloud='train-packstack')
     instances = list(conn.list_servers())
     vms = []
@@ -15,6 +15,7 @@ def vm_discover():
         tmp.append(instance.flavor.id)
 
         vms.append(tmp)
+        #tmp.clear()
         tmp = []
 
     return(vms)
