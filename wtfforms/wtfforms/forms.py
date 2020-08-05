@@ -15,9 +15,17 @@ class LoginForm(FlaskForm):
     password = StringField('Password', validators=[DataRequired(), Length(min=8, message=('Your password is too short.'))])
     submit = SubmitField('Submit')
 
-class PrefOS(FlaskForm):
+class PrefOSForm(FlaskForm):
     """Openstack preferences form."""
     submit = SubmitField('Submit')
+
+class VMControlForm(FlaskForm):
+    """Openstack vm control form."""
+    start = SubmitField(label='Start')
+    stop = SubmitField(label='Stop')
+    pause = SubmitField(label='Pause')
+    console = SubmitField(label='Console')
+    show = SubmitField(label='Show')
 
 class SignupForm(FlaskForm):
     """Sign up for a user account."""

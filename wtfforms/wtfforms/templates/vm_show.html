@@ -1,0 +1,11 @@
+{% extends "index.html" %}{% block body %}
+            <h2>Virtuális gép adatai</h2>
+            <div class="detail">
+              <dl class="dl-horizontal">
+                <dt>Name</dt>
+                <dd data-display="vm02" class="word-wrap">{{ instance[1] }}</dd>
+                <dt>ID</dt>
+                <dd>{{ instance[0] }}</dd>
+              </dl>
+            </div>
+{% endblock %}

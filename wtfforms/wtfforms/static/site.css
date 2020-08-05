@@ -1,0 +1,13 @@
+dl { margin-top: 0; margin-bottom: 18px; }
+
+dt, dd { line-height: 1.42857; }
+
+dt { font-weight: bold; }
+
+dd { margin-left: 0; }
+
+.dl-horizontal dd:before, .dl-horizontal dd:after { content: " "; display: table; }
+.dl-horizontal dd:after { clear: both; }
+@media (min-width: 768px) { .dl-horizontal dt { float: left; width: 160px; clear: left; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dl-horizontal dd { margin-left: 180px; }
+}

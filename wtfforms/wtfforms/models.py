@@ -9,7 +9,7 @@ class Flavor(db.Model):
     instances = db.relationship('Instance', backref='resource', lazy=True)
 
     def __repr__(self):
-        return f"User('{self.id}', '{self.name}')"
+        return f"Flavor('{self.id}', '{self.name}')"
 
 class Instance(db.Model):
     uuid = db.Column(db.String(20), primary_key=True)
@@ -18,4 +18,4 @@ class Instance(db.Model):
     flavor_id = db.Column(db.Integer, db.ForeignKey('flavor.id'), nullable=False)
 
     def __repr__(self):
-        return f"User('{self.uuid}', '{self.name}', '{self.state}')"
+        return f"Instance('{self.uuid}', '{self.name}', '{self.state}')"

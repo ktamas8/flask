@@ -19,3 +19,15 @@ def instance_discover():
         tmp = []
 
     return(vms)
+
+def image_discover():
+    pass
+
+def network_discover():
+    pass
+
+def subnet_discover():
+    pass
+
+def keypair_discover():
+    pass
